@@ -13,9 +13,9 @@ abstract class Product {
         this.price = price;
         this.stock = stock;
     }
+
     public int checkDiscount(int quantity) {
         // TODO: Implement this method.
         return 0;
     }
-
 }

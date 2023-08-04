@@ -1,5 +1,5 @@
 public class Fruit extends Product {
-    private boolean isLocal = false;
+    private boolean isLocal;
     
     // TODO: Implement this class.
 

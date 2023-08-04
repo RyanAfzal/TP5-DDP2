@@ -1,6 +1,6 @@
 public class Veggie extends Product{
     // TODO: Implement this class.
-    private boolean isOrganic = false;
+    private boolean isOrganic;
 
     public Veggie(){
 
