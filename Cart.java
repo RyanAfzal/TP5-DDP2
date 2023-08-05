@@ -2,16 +2,15 @@ import java.util.ArrayList;
 
 public class Cart {
     private Customer customer;
-    private ArrayList<OrderItem> orderList;
+    private ArrayList<OrderItem> orderList = new ArrayList<>();
 
     public Cart(){
 
     }
     
-    Cart(Customer customer , ArrayList<OrderItem> orderList) {
+    Cart(Customer customer) {
         // TODO: Implement this method.
         this.customer = customer;
-        this.orderList = orderList;
     }
 
     public int getTotalPrice() {
@@ -21,5 +20,6 @@ public class Cart {
 
     public void addOrderItem(OrderItem orderItem) {
         // TODO: Implement this method.
+        this.orderList.add(orderItem);
     }
 }

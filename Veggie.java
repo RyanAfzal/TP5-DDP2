@@ -11,7 +11,7 @@ public class Veggie extends Product{
         this.isOrganic = isOrganic;
     }
 
-    private boolean isOrganic(){
+    public boolean isOrganic(){
         return isOrganic;
     }
 

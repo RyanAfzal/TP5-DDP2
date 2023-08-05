@@ -12,7 +12,7 @@ public class Fruit extends Product {
         this.isLocal = isLocal;
     }
 
-    private boolean isLocal(){
+    public boolean isLocal(){
         return isLocal;
     }
 
