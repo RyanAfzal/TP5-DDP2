@@ -1,0 +1,15 @@
+Berikut adalah rekap perbelanjaan hari ini:
+
+=============================
+Nama Customer: Fajar Silalahi
+Daftar Belanja:
+Jeruk Medan 3kg 60000
+Kiwi Afrika 6kg 189600
+
+Total Perbelanjaan: 249600
+=============================
+Nama Customer: Hana Mandalika
+Daftar Belanja:
+Kale Angkasa 10kg 640000
+
+Total Perbelanjaan: 576000

@@ -12,8 +12,16 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
+    public Product getProduct(){
+        return product;
+    }
+
+    public int getQuantity(){
+        return quantity;
+    }
+
     public int getFinalPrice() {
         // TODO: Implement this method.
-        return 0;
+        return (int) (this.product.getPrice() - (this.product.getPrice() * this.product.checkDiscount(this.quantity)/100)) * this.quantity;
     }
 }

@@ -21,22 +21,22 @@ public class Veggie extends Product{
         int discount = 0;
 
         if (isOrganic()){
-            if(quantity >= 3){
-                discount = (int) 10/100;
+            if(quantity >= 5){
+                discount = 20;
             }
 
-            else if(quantity >= 5){
-                discount = (int) 20/100;
+            else if(quantity >= 3){
+                discount = 10;
             }
         }
 
         else{
-            if(quantity >= 3){
-                discount = (int) 20/100;
+            if(quantity >= 5){
+                discount = 25;
             }
 
-            else if(quantity >= 5){
-                discount = (int) 25/100;
+            else if(quantity >= 3){
+                discount = 20;
             }
         }
         return discount;

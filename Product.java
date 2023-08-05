@@ -26,8 +26,10 @@ abstract class Product {
         return price;
     }
     
-    public abstract int checkDiscount(int quantity);
+    public int checkDiscount(int quantity){
         // TODO: Implement this method.
+        return 0;
+    }
 
     public void setStock(int jumlahDibeli){
         this.stock -= jumlahDibeli;

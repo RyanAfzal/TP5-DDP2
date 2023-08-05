@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,14 +17,15 @@ public class ShyourBox {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         ShyourBox shyourBox = new ShyourBox();
         System.out.println("Welcome to ShyourBox! Yuk beli jangan shy shy!");
+        System.out.println();
 
         // Subject to change: file address.
         String productAddress = "input/daftarProduk.txt";
         String customerAddress = "input/daftarCustomer.txt";
 
         try{
-            shyourBox.addProduct(productAddress);
             shyourBox.addCustomer(customerAddress);
+            shyourBox.addProduct(productAddress);
         }
 
         catch (FileNotFoundException e){
@@ -35,6 +38,7 @@ public class ShyourBox {
 
         Scanner scanner = new Scanner(System.in);
         int choice;
+        System.out.println();
         do {
             System.out.println("Menu" +
                     "\n1. Beli Produk" +
@@ -95,8 +99,10 @@ public class ShyourBox {
                     break;
                 case 3:
                     shyourBox.printReceipt();
+                    System.out.println();
                     break;
                 case 0:
+                    System.out.println();
                     System.out.println("Yay!");
                     break;
                 default:
@@ -128,6 +134,7 @@ public class ShyourBox {
 
         if(adaCustomer){
             System.out.println("====MASUKKAN ITEM KE KERANJANG====");
+            System.out.println();
 
             boolean selesaiBelanja = false;
 
@@ -205,6 +212,8 @@ public class ShyourBox {
      */
     public void addProduct(String fileAddress) throws FileNotFoundException, IOException{
         // TODO: Implement this method.
+        int jmlBerhasil = 0;
+        int jmlGagal = 0;
         BufferedReader reader = new BufferedReader(new FileReader(fileAddress)); 
         String line;
 
@@ -215,25 +224,48 @@ public class ShyourBox {
                     if(lineSplit[0].equalsIgnoreCase("Fruit")){
                         if(lineSplit[4].trim().equalsIgnoreCase("Lokal")){
                             this.products.add(new Fruit(lineSplit[1].trim() , Integer.parseInt(lineSplit[2].trim()) , Integer.parseInt(lineSplit[3].trim()) , true));
+                            jmlBerhasil += 1;
                         }
 
                         else if(lineSplit[4].trim().equalsIgnoreCase("Impor")){
                             this.products.add(new Fruit(lineSplit[1].trim() , Integer.parseInt(lineSplit[2].trim()) , Integer.parseInt(lineSplit[3].trim()) , false));
+                            jmlBerhasil += 1;
+                        }
+
+                        else{
+                            jmlGagal += 1;
                         }
                     }
 
                     else if(lineSplit[0].equalsIgnoreCase("Veggie")){
                         if(lineSplit[4].trim().equalsIgnoreCase("Organik")){
                             this.products.add(new Veggie(lineSplit[1].trim() , Integer.parseInt(lineSplit[2].trim()) , Integer.parseInt(lineSplit[3].trim()) , true));
+                            jmlBerhasil += 1;
                         }
 
                         else if(lineSplit[4].trim().equalsIgnoreCase("Konvensional")){
                             this.products.add(new Veggie(lineSplit[1].trim() , Integer.parseInt(lineSplit[2].trim()) , Integer.parseInt(lineSplit[3].trim()) , false));
+                            jmlBerhasil += 1;
+                        }
+
+                        else{
+                            jmlGagal += 1;
                         }
                     }
                 }
+
+                else{
+                    jmlGagal += 1;
+                }
+            }
+
+            else{
+                jmlGagal += 1;
             }
         }
+        reader.close();
+        System.out.println("Berhasil menambahkan "+ jmlBerhasil + " Produk");
+        System.out.println("Gagal menambahkan "+ jmlGagal + " Produk");
     }
 
     /**
@@ -243,6 +275,8 @@ public class ShyourBox {
      */
     public void addCustomer(String fileAddress) throws FileNotFoundException, IOException {
         // TODO: Implement this method.
+        int jmlBerhasil = 0;
+        int jmlGagal = 0;
         BufferedReader reader = new BufferedReader(new FileReader(fileAddress)); 
         String line;
 
@@ -251,22 +285,56 @@ public class ShyourBox {
                 String[] lineSplit = line.split(",");
                 if(lineSplit[1].trim().equalsIgnoreCase("Premium") || lineSplit[1].trim().equalsIgnoreCase("Reguler") ){
                     if(lineSplit[1].trim().equalsIgnoreCase("Premium")){
-                        this.customers.add(new Customer(lineSplit[0] , true));
+                        Customer currentCustomer = new Customer(lineSplit[0] , true);
+                        this.customers.add(currentCustomer);
+                        this.carts.add(currentCustomer.getCart());
+                        jmlBerhasil += 1;
                     }
 
                     else if(lineSplit[1].trim().equalsIgnoreCase("Reguler")){
-                        this.customers.add(new Customer(lineSplit[0] , false));
+                        Customer currentCustomer = new Customer(lineSplit[0] , false);
+                        this.customers.add(currentCustomer);
+                        this.carts.add(currentCustomer.getCart());
+                        jmlBerhasil += 1;
                     }
                 }
+
+                else{
+                    jmlGagal += 1;
+                }
+            }
+
+            else{
+                jmlGagal += 1;
             }
         }
+        reader.close();
+        System.out.println("Berhasil menambahkan "+ jmlBerhasil + " Customer");
+        System.out.println("Gagal menambahkan "+ jmlGagal + " Customer");
     }
 
     /**
      * Method untuk mencetak struk belanja pada file txt.
      */
-    public void printReceipt() {
+    public void printReceipt() throws IOException {
         // TODO: Implement this method.
+        PrintWriter writer = new PrintWriter(new FileWriter("Struk.txt"));
+        writer.println("Berikut adalah rekap perbelanjaan hari ini:");
+        writer.println();
+
+        for(Customer customer : customers){
+            if(customer.getCart().getOrderItemList().isEmpty() == false){
+                writer.println("=============================");
+                writer.println("Nama Customer: " + customer.getName());
+                writer.println("Daftar Belanja:");
+                for(OrderItem item : customer.getCart().getOrderItemList()){
+                    writer.println(item.getProduct().getProductName() + " " + item.getQuantity() + "kg " + item.getFinalPrice());
+                }
+                writer.println();
+                writer.println("Total Perbelanjaan: " + customer.getCart().getTotalPrice());
+            }
+        }
+        writer.close();
     }
 
 }

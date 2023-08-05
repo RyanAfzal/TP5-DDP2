@@ -22,22 +22,22 @@ public class Fruit extends Product {
         int discount = 0;
 
         if (isLocal()){
-            if(quantity >= 3){
-                discount = (int) 20/100;
+            if(quantity >= 5){
+                discount = 30;
             }
 
-            else if(quantity >= 5){
-                discount = (int) 30/100;
+            else if(quantity >= 3){
+                discount = 20;
             }
         }
 
         else{
-            if(quantity >= 3){
-                discount = (int) 15/100;
+            if(quantity >= 5){
+                discount = 20;
             }
 
-            else if(quantity >= 5){
-                discount = (int) 20/100;
+            else if(quantity >= 3){
+                discount = 15;
             }
         }
         return discount;

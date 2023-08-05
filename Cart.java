@@ -15,11 +15,26 @@ public class Cart {
 
     public int getTotalPrice() {
         // TODO: Implement this method.
-        return 0;
+        int totalPrice = 0;
+
+        for (OrderItem item : orderList){
+            totalPrice += item.getFinalPrice();
+        }
+
+        if(this.customer.isPremium() && totalPrice >= 300000){
+            int discount = totalPrice * 10/100;
+            totalPrice -= discount;
+        }
+
+        return totalPrice;
     }
 
     public void addOrderItem(OrderItem orderItem) {
         // TODO: Implement this method.
         this.orderList.add(orderItem);
+    }
+
+    public ArrayList<OrderItem> getOrderItemList(){
+        return orderList;
     }
 }
