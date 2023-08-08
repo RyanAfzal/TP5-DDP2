@@ -527,4 +527,9 @@ public class ShyourBox {
         writer.close();
     }
 
+    //untuk testing
+    public ArrayList<Product> getProductList(){
+        return products;
+    }
+
 }
