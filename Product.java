@@ -14,6 +14,7 @@ abstract class Product {
         this.stock = stock;
     }
 
+    //getter
     public String getProductName(){
         return name;
     }
@@ -26,11 +27,17 @@ abstract class Product {
         return price;
     }
     
+    /**
+     * Untuk mendapatkan diskon suatu produk
+     * @param quantity jumlah suatu produk
+     * @return diskon produk
+     */
     public int checkDiscount(int quantity){
         // TODO: Implement this method.
         return 0;
     }
 
+    //setter
     public void setStock(int jumlahDibeli){
         this.stock -= jumlahDibeli;
     }

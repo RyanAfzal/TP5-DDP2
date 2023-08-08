@@ -12,11 +12,15 @@ public class Fruit extends Product {
         this.isLocal = isLocal;
     }
 
+    //getter
     public boolean isLocal(){
         return isLocal;
     }
 
     @Override
+    /**
+     * Override method superclass nya (Product)
+     */
     public int checkDiscount(int quantity) {
         // TODO: Implement this method.
         int discount = 0;

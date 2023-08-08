@@ -13,6 +13,7 @@ public class Customer {
         this.isPremium = isPremium;
     }
 
+    //getter
     public String getName(){
         return name;
     }

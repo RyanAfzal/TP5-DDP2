@@ -11,11 +11,15 @@ public class Veggie extends Product{
         this.isOrganic = isOrganic;
     }
 
+    //getter
     public boolean isOrganic(){
         return isOrganic;
     }
 
     @Override
+    /**
+     * Override method superclass nya (Product) 
+     */
     public int checkDiscount(int quantity) {
         // TODO: Implement this method.
         int discount = 0;
